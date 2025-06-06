@@ -1,24 +1,24 @@
+// src/components/ridecard.tsx
 import PolylineCanvas from "./PolylineCanvas";
 
-type Activity = {
+interface Activity {
   name: string;
   distance: number;
-  total_elevation_gain: number;
   moving_time: number;
-  average_speed?: number;
+  total_elevation_gain: number;
+  average_speed: number;
   average_watts?: number;
   map: {
     summary_polyline: string;
   };
-};
+}
 
-export default function RideCard({
-  activity,
-  imageUrl,
-}: {
+interface RideCardProps {
   activity: Activity;
   imageUrl: string | null;
-}) {
+}
+
+export default function RideCard({ activity, imageUrl }: RideCardProps) {
   return (
     <div className="relative w-[360px] h-[500px] font-sans rounded-xl overflow-hidden">
       <div
@@ -34,8 +34,8 @@ export default function RideCard({
         <div>{(activity.distance / 1000).toFixed(1)} km</div>
         <div>{activity.total_elevation_gain} hm</div>
         <div>{(activity.moving_time / 60).toFixed(0)} min</div>
-        <div>{(activity.average_speed ?? 3.6).toFixed(1)} km/h</div>
-        <div>{(activity.average_watts ?? 0).toFixed(1)} w</div>
+        <div>{(activity.average_speed * 3.6).toFixed(1)} km/h</div>
+        <div>{activity.average_watts?.toFixed(1) || "--"} w</div>
       </div>
     </div>
   );
