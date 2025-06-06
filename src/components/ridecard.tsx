@@ -1,4 +1,3 @@
-// src/components/ridecard.tsx
 import PolylineCanvas from "./PolylineCanvas";
 
 interface Activity {
